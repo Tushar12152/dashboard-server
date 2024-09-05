@@ -27,6 +27,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
 
     const userCollection = client.db("dashboard-db").collection("users");
+    const transectionCollection = client.db("dashboard-db").collection("transections");
 
 
     app.post('/users', async (req, res) => {
@@ -63,6 +64,16 @@ async function run() {
       const result = await userCollection.updateOne(filter, updatedDoc, options)
       res.send(result)
 
+    })
+
+
+
+    // transection APIS
+
+    app.post('/transections',async (req,res)=>{
+        const transection= req.body
+        const result=await transectionCollection.insertOne(transection)
+        res.send(result)
     })
 
 
